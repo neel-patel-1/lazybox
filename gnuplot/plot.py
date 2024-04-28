@@ -23,6 +23,7 @@ def get_args():
                 'clustered_boxes', 'clustered_boxes-yerr', 'heatmap'],
             default='scatter', help='plot type')
     parser.add_argument('--pointsize', metavar='<size>', help='size of point')
+    parser.add_argument('--xzeroaxis', metavar='<xzeroaxis>', help='draw an xaxis at zero')
     parser.add_argument('--font', metavar='<font>', help='font and size')
     parser.add_argument('--size', metavar='<width,height>',
             help='size of plotted image')
@@ -59,6 +60,7 @@ def gen_gp_cmd(data_path, nr_recs, nr_cols, args):
     xtime_fmt = args.xtime_fmt
     plot_type = args.type
     pointsize = args.pointsize
+    xzeroaxis = args.xzeroaxis
     output = args.out
     title = args.title
     xtitle = args.xtitle
@@ -98,6 +100,9 @@ def gen_gp_cmd(data_path, nr_recs, nr_cols, args):
 
     if pointsize:
         cmds += ['set pointsize %s;' % pointsize]
+
+    if xzeroaxis:
+        cmds += ['set xzeroaxis;']
 
     if xtics_rotate:
         cmds += ['set xtics rotate by %d;' % xtics_rotate]
